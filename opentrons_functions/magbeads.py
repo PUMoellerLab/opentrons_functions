@@ -172,9 +172,9 @@ def bead_wash(  # global arguments
                        blow_out=super_blowout,
                        vol_fn=vol_fn)
 
-    if resuspend_beads:
+    #if resuspend_beads: ### removing this so the function will be compatible with Flex --> need to revisit later!
         # disengage magnet
-        magblock.disengage()
+        #magblock.disengage()
 
     # This should:
     # - Pick up tips from column 3 of location 2
@@ -218,11 +218,11 @@ def bead_wash(  # global arguments
                  mix_lift=mix_lift,
                  mix_rate=mix_rate)
 
-        # engage magnet
-        if mag_engage_height is not None:
-            magblock.engage(height_from_base=mag_engage_height)
-        else:
-            magblock.engage()
+        # engage magnet ###removing this so the function will be compatible with Flex --> need to revisit!
+        #if mag_engage_height is not None:
+            #magblock.engage(height_from_base=mag_engage_height)
+        #else:
+            #magblock.engage()
 
         protocol.delay(seconds=pause_s)
 
