@@ -175,7 +175,7 @@ def bead_wash(  # global arguments
     if resuspend_beads:
         # move magplate off of magblock and onto free deck spot to 'disengage' magnet
         # doing this manually for now until we can get gripper to work again
-        protocol.move_labware(labware=mag_plate, new_location="A2", use_gripper=False)
+        protocol.move_labware(labware=plate, new_location="A2", use_gripper=False)
 
     # This should:
     # - Pick up tips from column 3 of location 2
@@ -221,7 +221,7 @@ def bead_wash(  # global arguments
 
     # move magplate free deck spot back onto magblock to 're-engage' magnet
     # doing this manually for now until we can get gripper to work again
-    protocol.move_labware(labware=mag_plate, new_location=magblock, use_gripper=False)
+    protocol.move_labware(labware=plate, new_location=magblock, use_gripper=False)
 
     protocol.delay(seconds=pause_s)
 
