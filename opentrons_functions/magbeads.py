@@ -130,7 +130,7 @@ def bead_wash(  # global arguments
               super_bottom_offset=2,
               super_tip_vol=200,
               super_blowout=False,
-              drop_super_tip=True,
+              drop_super_tip=False,
               vol_fn=None,
               wash_vol=300,
               remaining=None,
@@ -172,9 +172,10 @@ def bead_wash(  # global arguments
                        blow_out=super_blowout,
                        vol_fn=vol_fn)
 
-    #if resuspend_beads: ### removing this so the function will be compatible with Flex --> need to revisit later!
-        # disengage magnet
-        #magblock.disengage()
+    if resuspend_beads:
+        # move magplate off of magblock and onto free deck spot to 'disengage' magnet
+        # doing this manually for now until we can get gripper to work again
+        protocol.move_labware(labware=mag_plate, new_location="A2", use_gripper=False)
 
     # This should:
     # - Pick up tips from column 3 of location 2
@@ -218,13 +219,11 @@ def bead_wash(  # global arguments
                  mix_lift=mix_lift,
                  mix_rate=mix_rate)
 
-        # engage magnet ###removing this so the function will be compatible with Flex --> need to revisit!
-        #if mag_engage_height is not None:
-            #magblock.engage(height_from_base=mag_engage_height)
-        #else:
-            #magblock.engage()
+    # move magplate free deck spot back onto magblock to 're-engage' magnet
+    # doing this manually for now until we can get gripper to work again
+    protocol.move_labware(labware=mag_plate, new_location=magblock, use_gripper=False)
 
-        protocol.delay(seconds=pause_s)
+    protocol.delay(seconds=pause_s)
 
     return(wash_wells, wash_remaining)
 
