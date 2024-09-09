@@ -22,9 +22,10 @@ def bead_mix(pipette,
             pipette.pick_up_tip(tiprack.wells_by_name()[col])
 
         pipette.move_to(plate[col].top())
-        if aspirated:
-            pipette.dispense(20)
-            aspirated=False
+        #OpenTrons Flex didn't like this code (potential to dispense 20 after not aspirating - condition should be defined later? removed for now
+        #if aspirated:
+            #pipette.dispense(20)
+            #aspirated=False
         for step in range(n):
             pipette.aspirate(mix_vol,
                              plate[col].bottom(z=z_offset),
@@ -219,9 +220,9 @@ def bead_wash(  # global arguments
                  mix_lift=mix_lift,
                  mix_rate=mix_rate)
 
-    # move magplate free deck spot back onto magblock to 're-engage' magnet
-    # doing this manually for now until we can get gripper to work again
-    protocol.move_labware(labware=plate, new_location=magblock, use_gripper=False)
+        # move magplate free deck spot back onto magblock to 're-engage' magnet
+        # doing this manually for now until we can get gripper to work again
+        protocol.move_labware(labware=plate, new_location=magblock, use_gripper=False)
 
     protocol.delay(seconds=pause_s)
 
